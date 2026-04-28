@@ -1,0 +1,7 @@
+{
+  "name": "jobPilot",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
