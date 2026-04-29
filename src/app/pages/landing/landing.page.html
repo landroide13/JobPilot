@@ -1,0 +1,178 @@
+<ion-content [fullscreen]="true">
+  <main class="landing">
+    <nav class="nav">
+      <div class="logo">
+        <span class="logo-mark">JP</span>
+        <span>JobPilot CRM</span>
+      </div>
+
+      <div class="lang-switch">
+        <button [class.active]="lang() === 'en'" (click)="switchLang('en')">EN</button>
+        <button [class.active]="lang() === 'fr'" (click)="switchLang('fr')">FR</button>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="badge">{{ copy().badge }}</div>
+
+        <h1>{{ copy().title }}</h1>
+
+        <p>
+          {{ copy().subtitle }}
+        </p>
+
+        <div class="hero-actions">
+          <ion-button size="large">
+            {{ copy().primaryCta }}
+          </ion-button>
+
+          <ion-button size="large" fill="outline">
+            {{ copy().secondaryCta }}
+          </ion-button>
+        </div>
+      </div>
+
+      <div class="phone-card">
+        <div class="phone-header">
+          <span>Today</span>
+          <strong>6 jobs</strong>
+        </div>
+
+        <div class="job-card active">
+          <small>09:30 · Paris 11</small>
+          <h3>Boiler repair</h3>
+          <p>Client notified by SMS</p>
+        </div>
+
+        <div class="job-card">
+          <small>12:00 · Lille</small>
+          <h3>Office cleaning</h3>
+          <p>Before photos uploaded</p>
+        </div>
+
+        <div class="job-card">
+          <small>15:30 · Berlin</small>
+          <h3>HVAC maintenance</h3>
+          <p>Invoice ready with Stripe</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="problem">
+      <h2>{{ copy().problemTitle }}</h2>
+
+      <div class="problem-grid">
+        <div class="problem-item" *ngFor="let problem of copy().problems">
+          <span>✕</span>
+          <p>{{ problem }}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <h2>{{ copy().featuresTitle }}</h2>
+
+      <div class="feature-grid">
+        <article>
+          <div class="icon">📅</div>
+          <h3>{{ copy().scheduling }}</h3>
+          <p>{{ copy().schedulingText }}</p>
+        </article>
+
+        <article>
+          <div class="icon">📸</div>
+          <h3>{{ copy().photos }}</h3>
+          <p>{{ copy().photosText }}</p>
+        </article>
+
+        <article>
+          <div class="icon">💬</div>
+          <h3>{{ copy().sms }}</h3>
+          <p>{{ copy().smsText }}</p>
+        </article>
+
+        <article>
+          <div class="icon">💳</div>
+          <h3>{{ copy().invoices }}</h3>
+          <p>{{ copy().invoicesText }}</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="cities">
+      <h2>{{ copy().citiesTitle }}</h2>
+      <p>{{ copy().citiesText }}</p>
+    </section>
+
+    <section class="lead-form">
+      <div>
+        <h2>{{ copy().formTitle }}</h2>
+        <p>Perfect for Meta ads traffic from Lille, Paris and Berlin.</p>
+      </div>
+
+      <form (ngSubmit)="submitLead()">
+        <ion-input
+          [(ngModel)]="form.name"
+          name="name"
+          label="{{ copy().name }}"
+          label-placement="floating"
+          fill="outline"
+          required
+        ></ion-input>
+
+        <ion-input
+          [(ngModel)]="form.email"
+          name="email"
+          label="{{ copy().email }}"
+          label-placement="floating"
+          fill="outline"
+          type="email"
+          required
+        ></ion-input>
+
+        <ion-select
+          [(ngModel)]="form.city"
+          name="city"
+          label="{{ copy().city }}"
+          label-placement="floating"
+          fill="outline"
+          required
+        >
+          <ion-select-option value="lille">Lille</ion-select-option>
+          <ion-select-option value="paris">Paris</ion-select-option>
+          <ion-select-option value="berlin">Berlin</ion-select-option>
+        </ion-select>
+
+        <ion-select
+          [(ngModel)]="form.trade"
+          name="trade"
+          label="{{ copy().trade }}"
+          label-placement="floating"
+          fill="outline"
+          required
+        >
+          <ion-select-option value="plumber">Plumber / Plombier</ion-select-option>
+          <ion-select-option value="hvac">HVAC / Chauffage-Climatisation</ion-select-option>
+          <ion-select-option value="cleaning">Cleaning / Nettoyage</ion-select-option>
+        </ion-select>
+
+        <ion-textarea
+          [(ngModel)]="form.message"
+          name="message"
+          label="{{ copy().message }}"
+          label-placement="floating"
+          fill="outline"
+          rows="4"
+        ></ion-textarea>
+
+        <ion-button expand="block" size="large" type="submit" [disabled]="loading()">
+          {{ loading() ? 'Sending...' : copy().submit }}
+        </ion-button>
+
+        <p class="success" *ngIf="success()">Thanks! We’ll contact you soon.</p>
+        <p class="error" *ngIf="errorMessage()">{{ errorMessage() }}</p>
+      </form>
+    </section>
+  </main>
+</ion-content>
