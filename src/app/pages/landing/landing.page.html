@@ -23,7 +23,7 @@
         </p>
 
         <div class="hero-actions">
-          <ion-button size="large">
+          <ion-button size="large" (click)="scrollToForm()">
             {{ copy().primaryCta }}
           </ion-button>
 
@@ -57,6 +57,20 @@
           <p>Invoice ready with Stripe</p>
         </div>
       </div>
+    </section>
+
+    <section class="trust-strip">
+      <div>✅ Free beta access</div>
+      <div>✅ No credit card required</div>
+      <div>✅ Built for small field teams</div>
+    </section>
+
+    <section class="beta-box">
+      <h2>Limited beta for Lille, Paris and Berlin</h2>
+      <p>
+        We are opening early access to the first 50 local service businesses.
+      </p>
+      <ion-button size="large" (click)="scrollToForm()">Join early access</ion-button>
     </section>
 
     <section class="problem">
@@ -105,7 +119,7 @@
       <p>{{ copy().citiesText }}</p>
     </section>
 
-    <section class="lead-form">
+    <section class="lead-form" id="form">
       <div>
         <h2>{{ copy().formTitle }}</h2>
         <p>Perfect for Meta ads traffic from Lille, Paris and Berlin.</p>

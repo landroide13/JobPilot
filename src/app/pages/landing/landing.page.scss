@@ -232,7 +232,44 @@ form {
   font-weight: 700;
 }
 
+.trust-strip {
+  max-width: 1180px;
+  margin: -24px auto 48px;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
 
+  div {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    padding: 16px;
+    font-weight: 800;
+    text-align: center;
+  }
+}
+
+@media (max-width: 800px) {
+  .trust-strip {
+    grid-template-columns: 1fr;
+  }
+}
+
+.beta-box {
+  max-width: 900px;
+  margin: 32px auto;
+  padding: 36px 24px;
+  background: #111827;
+  color: white;
+  border-radius: 30px;
+  text-align: center;
+
+  p {
+    color: #d1d5db;
+    font-size: 18px;
+  }
+}
 
 
 

@@ -142,4 +142,9 @@ export class LandingPage {
     };
   }
 
+  scrollToForm(){
+    const element = document.getElementById('form');
+    element?.scrollIntoView({ behavior: 'smooth' });
+  }
+
 }
