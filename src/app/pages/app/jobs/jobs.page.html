@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Jobs</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <section class="jobs-page">
+    <div class="top-row">
+      <div>
+        <h1>All Jobs</h1>
+        <p>Track scheduled, active and completed work.</p>
+      </div>
+
+      <ion-button routerLink="/app/jobs/new">New</ion-button>
+    </div>
+
+    <ion-segment
+      [value]="selectedStatus()"
+      (ionChange)="setStatus($event.detail.value)"
+    >
+      <ion-segment-button value="all">
+        <ion-label>All</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="scheduled">
+        <ion-label>Scheduled</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="in_progress">
+        <ion-label>Active</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="completed">
+        <ion-label>Done</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div class="center" *ngIf="loading()">
+      <ion-spinner></ion-spinner>
+    </div>
+
+    <p class="empty" *ngIf="!loading() && filteredJobs().length === 0">
+      No jobs found.
+    </p>
+
+    <ion-card *ngFor="let job of filteredJobs()" [routerLink]="['/app/jobs', job.id]">
+      <ion-card-header>
+        <ion-card-title>{{ job.title }}</ion-card-title>
+        <ion-card-subtitle>
+          {{ job.clients?.name }} · {{ job.scheduled_at | date:'mediumDate' }}
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p>{{ job.clients?.address }}</p>
+        <ion-chip>{{ job.status }}</ion-chip>
+      </ion-card-content>
+    </ion-card>
+  </section>
+</ion-content>

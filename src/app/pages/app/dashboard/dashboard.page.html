@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Today</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <section class="dashboard">
+    <div class="summary-card">
+      <p>Today</p>
+      <h1>{{ jobs().length }} jobs</h1>
+      <span>Keep your field team on track</span>
+    </div>
+
+    <div class="quick-actions">
+      <ion-button routerLink="/app/jobs/new">New Job</ion-button>
+      <ion-button fill="outline" routerLink="/app/jobs">All Jobs</ion-button>
+    </div>
+
+    <h2>Scheduled today</h2>
+
+    <div class="center" *ngIf="loading()">
+      <ion-spinner></ion-spinner>
+    </div>
+
+    <p class="error" *ngIf="errorMessage()">{{ errorMessage() }}</p>
+
+    <p class="empty" *ngIf="!loading() && jobs().length === 0">
+      No jobs scheduled today.
+    </p>
+
+    <ion-card *ngFor="let job of jobs()" [routerLink]="['/app/jobs', job.id]">
+      <ion-card-header>
+        <ion-card-title>{{ job.title }}</ion-card-title>
+        <ion-card-subtitle>
+          {{ job.clients?.name }} · {{ job.scheduled_at | date:'shortTime' }}
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p>{{ job.clients?.address }}</p>
+        <ion-chip>{{ job.status }}</ion-chip>
+      </ion-card-content>
+    </ion-card>
+  </section>
+</ion-content>

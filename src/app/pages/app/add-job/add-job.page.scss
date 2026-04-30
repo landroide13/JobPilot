@@ -1,0 +1,60 @@
+.add-job {
+  padding: 20px;
+
+  h1 {
+    margin: 0;
+    font-size: 32px;
+  }
+
+  > p {
+    color: #6b7280;
+    margin-bottom: 24px;
+  }
+}
+
+form {
+  display: grid;
+  gap: 16px;
+}
+
+.datetime-card {
+  margin-top: 8px;
+  --background: transparent;
+  font-weight: 700;
+}
+
+ion-datetime {
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+}
+
+.center {
+  display: grid;
+  place-items: center;
+  padding: 40px;
+}
+
+.error {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

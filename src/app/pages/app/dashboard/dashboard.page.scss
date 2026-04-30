@@ -1,0 +1,60 @@
+.dashboard {
+  padding: 20px;
+}
+
+.summary-card {
+  background: #111827;
+  color: white;
+  border-radius: 28px;
+  padding: 28px;
+  margin-bottom: 20px;
+
+  p {
+    margin: 0;
+    color: #93c5fd;
+    font-weight: 700;
+  }
+
+  h1 {
+    font-size: 44px;
+    margin: 8px 0;
+  }
+
+  span {
+    color: #d1d5db;
+  }
+}
+
+.quick-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+h2 {
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
