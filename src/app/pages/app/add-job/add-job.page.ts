@@ -1,27 +1,31 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
-import { JobService } from '../core/services/job.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 import { Client } from '../core/models/client.model';
+import { JobService } from '../core/services/job.service';
 import { ClientService } from '../core/services/client.service';
 
 @Component({
   selector: 'app-add-job',
-  templateUrl: './add-job.page.html',
-  styleUrls: ['./add-job.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterLink,
+    IonicModule
+  ],
+  templateUrl: './add-job.page.html',
+  styleUrls: ['./add-job.page.scss']
 })
 export class AddJobPage implements OnInit {
-
   clients = signal<Client[]>([]);
   loading = signal(false);
   saving = signal(false);
   errorMessage = signal('');
 
-  organizationId = 'PASTE_TEST_ORGANIZATION_ID';
+  organizationId = 'd8c9ffbb-69d7-4a64-bd9c-001704f6d7ff';
 
   form = {
     client_id: '',
@@ -79,5 +83,4 @@ export class AddJobPage implements OnInit {
       this.saving.set(false);
     }
   }
-
 }

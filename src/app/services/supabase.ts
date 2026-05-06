@@ -18,28 +18,33 @@ export interface LeadPayload {
 })
 export class Supabase {
 
-  private supabase: SupabaseClient;
+  //private supabase: SupabaseClient;
+
+  readonly client: SupabaseClient;
+
 
   constructor() {
-    this.supabase = createClient(
+    this.client = createClient(
       environment.supabaseUrl,
-      environment.supabasePublishableKey,
+       environment.supabaseKey,
       {
         auth: {
-          persistSession: false,
-          autoRefreshToken: false,
-          detectSessionInUrl: false
+          persistSession: true,
+          autoRefreshToken: true,
+          detectSessionInUrl: true
         }
       }
     );
+    console.log('Supabase URL:', environment.supabaseUrl);
+    console.log('Supabase key exists:', !!environment.supabaseKey);
   }
 
-  get client() {
-    return this.supabase;
-  }
+  // get client() {
+  //   return this.supabase;
+  // } 
  
-  async createLead(payload: any) {
-    return this.supabase
+  async createLead(payload: LeadPayload) {
+    return this.client
       .from('leads')
       .insert(payload)
   }

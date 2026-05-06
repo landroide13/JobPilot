@@ -1,13 +1,83 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>add-job</ion-title>
+    <ion-title>New Job</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">add-job</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <section class="add-job">
+    <h1>Create job</h1>
+    <p>Add a scheduled job for a client.</p>
+
+    <div class="center" *ngIf="loading()">
+      <ion-spinner></ion-spinner>
+    </div>
+
+    <form *ngIf="!loading()" (ngSubmit)="submit()">
+      <ion-select
+        [(ngModel)]="form.client_id"
+        name="client_id"
+        label="Client"
+        label-placement="floating"
+        fill="outline"
+        required
+      >
+        <ion-select-option
+          *ngFor="let client of clients()"
+          [value]="client.id"
+        >
+          {{ client.name }}
+        </ion-select-option>
+      </ion-select>
+
+      <ion-input
+        [(ngModel)]="form.title"
+        name="title"
+        label="Job title"
+        label-placement="floating"
+        fill="outline"
+        placeholder="Boiler repair, deep cleaning..."
+        required
+      ></ion-input>
+
+      <ion-textarea
+        [(ngModel)]="form.description"
+        name="description"
+        label="Description"
+        label-placement="floating"
+        fill="outline"
+        rows="4"
+      ></ion-textarea>
+
+      <ion-item lines="none" class="datetime-card">
+        <ion-label>Scheduled date</ion-label>
+      </ion-item>
+
+      <ion-datetime
+        [(ngModel)]="form.scheduled_at"
+        name="scheduled_at"
+        presentation="date-time"
+      ></ion-datetime>
+
+      <p class="error" *ngIf="errorMessage()">{{ errorMessage() }}</p>
+
+      <ion-button
+        expand="block"
+        size="large"
+        type="submit"
+        [disabled]="saving()"
+      >
+        {{ saving() ? 'Saving...' : 'Create Job' }}
+      </ion-button>
+
+      <ion-button
+        expand="block"
+        fill="clear"
+        routerLink="/app/jobs"
+        type="button"
+      >
+        Cancel
+      </ion-button>
+    </form>
+  </section>
 </ion-content>

@@ -19,7 +19,7 @@ export class JobsPage implements OnInit {
   loading = signal(true);
   selectedStatus = signal<'all' | JobStatus>('all');
 
-  organizationId = 'PASTE_TEST_ORGANIZATION_ID';
+  organizationId = 'd8c9ffbb-69d7-4a64-bd9c-001704f6d7ff';
 
   constructor(private jobService: JobService) {}
 
@@ -31,6 +31,7 @@ export class JobsPage implements OnInit {
     try {
       this.loading.set(true);
       const jobs = await this.jobService.getJobs(this.organizationId);
+      console.log(jobs)
       this.jobs.set(jobs);
     } catch (error) {
       console.error(error);

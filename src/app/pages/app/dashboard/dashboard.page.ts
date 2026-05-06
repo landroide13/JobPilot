@@ -20,7 +20,7 @@ export class DashboardPage implements OnInit {
   errorMessage = signal('');
 
   // Temporary until auth/org onboarding exists.
-  organizationId = 'PASTE_TEST_ORGANIZATION_ID';
+  organizationId = 'd8c9ffbb-69d7-4a64-bd9c-001704f6d7ff';
 
   constructor(private jobService: JobService) {}
 

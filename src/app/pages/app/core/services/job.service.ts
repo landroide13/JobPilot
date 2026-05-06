@@ -1,5 +1,3 @@
-// src/app/core/services/job.service.ts
-
 import { Injectable } from '@angular/core';
 import { Supabase } from '../../../../services/supabase';
 import { CreateJobDto } from '../dto/create-job.dto';
@@ -10,7 +8,7 @@ import { Job } from '../models/job.model';
   providedIn: 'root'
 })
 export class JobService {
-  constructor(private supabase: Supabase) {}
+  constructor(private supabase: Supabase) {} 
 
   async getTodayJobs(organizationId: string): Promise<Job[]> {
     const start = new Date();
@@ -53,7 +51,12 @@ export class JobService {
       .eq('organization_id', organizationId)
       .order('scheduled_at', { ascending: true });
 
-    if (error) throw error;
+    if (error) {
+      console.error('Supabase jobs error:', error);
+      throw error;
+    }
+
+    console.log(data)
 
     return data as Job[];
   }

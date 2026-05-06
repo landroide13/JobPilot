@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   supabaseUrl: 'https://bvxisilollwzqymuphaj.supabase.co',
-  supabasePublishableKey: 'sb_publishable_hhQc90Op3jCmP6E7I9JewQ_k-S9ftZW'
+  supabaseKey: 'sb_publishable_hhQc90Op3jCmP6E7I9JewQ_k-S9ftZW',
 };
 
 /*
@@ -17,3 +17,5 @@ export const environment = {
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
 //Acm1pt@13131
+
+//d8c9ffbb-69d7-4a64-bd9c-001704f6d7ff
