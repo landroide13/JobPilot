@@ -18,10 +18,7 @@ export interface LeadPayload {
 })
 export class Supabase {
 
-  //private supabase: SupabaseClient;
-
   readonly client: SupabaseClient;
-
 
   constructor() {
     this.client = createClient(
@@ -29,9 +26,9 @@ export class Supabase {
        environment.supabaseKey,
       {
         auth: {
-          persistSession: true,
-          autoRefreshToken: true,
-          detectSessionInUrl: true
+          persistSession: false,
+          autoRefreshToken: false,
+          detectSessionInUrl: false
         }
       }
     );

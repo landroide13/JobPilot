@@ -70,13 +70,46 @@ export class JobService {
   }
 
   async updateStatus(jobId: string, dto: UpdateJobStatusDto): Promise<void> {
-    const { error } = await this.supabase.client
-      .from('jobs')
-      .update(dto)
-      .eq('id', jobId);
+    const { error } = await this.supabase.client.rpc('update_job_status', {
+      p_job_id: jobId,
+      p_status: dto.status,
+      p_completed_at: dto.completed_at ?? null
+    });
 
     if (error) throw error;
   }
+
+  async getJobById(jobId: string): Promise<Job> {
+    const { data, error } = await this.supabase.client
+      .from('jobs')
+      .select(`
+        *,
+        clients (
+          name,
+          phone,
+          email,
+          address,
+          notes
+        )
+      `)
+      .eq('id', jobId)
+      .single();
+
+    if (error) throw error;
+
+    return data as Job;
+  }
+
+  async markCompleted(jobId: string): Promise<void> {
+    const { error } = await this.supabase.client.rpc('update_job_status', {
+      p_job_id: jobId,
+      p_status: 'completed',
+      p_completed_at: new Date().toISOString()
+    });
+
+    if (error) throw error;
+  }
+  
 }
 
 

@@ -29,7 +29,7 @@ export const routes: Routes = [
 
 
   {
-    path: 'job-detail',
+    path: 'app/jobs/:id',
     loadComponent: () => import('./pages/app/job-detail/job-detail.page').then( m => m.JobDetailPage)
   },
   {

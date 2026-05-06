@@ -13,7 +13,7 @@ import { Job } from '../core/models/job.model';
   standalone: true,
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonChip, RouterLink, IonSpinner]
 })
-export class DashboardPage implements OnInit {
+export class DashboardPage {
 
   jobs = signal<Job[]>([]);
   loading = signal(true);
@@ -24,8 +24,8 @@ export class DashboardPage implements OnInit {
 
   constructor(private jobService: JobService) {}
 
-  async ngOnInit() {
-    await this.loadTodayJobs();
+  ionViewWillEnter(){
+    this.loadTodayJobs();
   }
 
   async loadTodayJobs() {

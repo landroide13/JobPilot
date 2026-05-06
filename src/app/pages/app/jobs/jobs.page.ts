@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component,signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonSegment, IonSegmentButton, IonLabel, IonSpinner, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonChip } from '@ionic/angular/standalone';
@@ -13,7 +13,7 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonSegment, IonSegmentButton, IonLabel, IonSpinner, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonChip, RouterLink]
 })
-export class JobsPage implements OnInit {
+export class JobsPage {
 
   jobs = signal<Job[]>([]);
   loading = signal(true);
@@ -23,7 +23,7 @@ export class JobsPage implements OnInit {
 
   constructor(private jobService: JobService) {}
 
-  async ngOnInit() {
+  async ionViewWillEnter(){
     await this.loadJobs();
   }
 

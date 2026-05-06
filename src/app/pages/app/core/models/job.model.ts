@@ -13,7 +13,9 @@ export interface Job {
   clients?: {
     name: string;
     phone?: string;
+    email?: string;
     address?: string;
+    notes?: string;
   };
 }
 

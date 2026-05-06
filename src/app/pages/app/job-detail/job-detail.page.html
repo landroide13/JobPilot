@@ -1,13 +1,134 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>job-detail</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/app/jobs"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Job Detail</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">job-detail</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <section class="job-detail">
+    <div class="center" *ngIf="loading()">
+      <ion-spinner></ion-spinner>
+    </div>
+
+    <p class="error" *ngIf="errorMessage()">{{ errorMessage() }}</p>
+
+    <ng-container *ngIf="!loading() && job() as job">
+      <div class="hero-card">
+        <div>
+          <p class="eyebrow">Job</p>
+          <h1>{{ job.title }}</h1>
+          <p>{{ job.description || 'No description.' }}</p>
+        </div>
+
+        <ion-chip>{{ job.status }}</ion-chip>
+      </div>
+
+      <div class="section-card">
+        <h2>Client</h2>
+
+        <p><strong>Name:</strong> {{ job.clients?.name }}</p>
+        <p><strong>Phone:</strong> {{ job.clients?.phone || 'N/A' }}</p>
+        <p><strong>Email:</strong> {{ job.clients?.email || 'N/A' }}</p>
+        <p><strong>Address:</strong> {{ job.clients?.address || 'N/A' }}</p>
+
+        <ion-button
+          *ngIf="job.clients?.phone"
+          expand="block"
+          [href]="'tel:' + job.clients?.phone"
+        >
+          Call Client
+        </ion-button>
+      </div>
+
+      <div class="section-card">
+        <h2>Schedule</h2>
+
+        <p>
+          <strong>Scheduled:</strong>
+          {{ job.scheduled_at | date:'medium' }}
+        </p>
+
+        <p *ngIf="job.completed_at">
+          <strong>Completed:</strong>
+          {{ job.completed_at | date:'medium' }}
+        </p>
+      </div>
+
+      <div class="section-card">
+        <h2>Status</h2>
+
+        <div class="status-actions">
+          <ion-button
+            fill="outline"
+            (click)="setStatus('scheduled')"
+            [disabled]="saving()"
+          >
+            Scheduled
+          </ion-button>
+
+          <ion-button
+            fill="outline"
+            (click)="setStatus('in_progress')"
+            [disabled]="saving()"
+          >
+            Start
+          </ion-button>
+
+          <ion-button
+            color="success"
+            (click)="markCompleted()"
+            [disabled]="saving()"
+          >
+            Mark Completed
+          </ion-button>
+
+          <ion-button
+            color="danger"
+            fill="outline"
+            (click)="setStatus('cancelled')"
+            [disabled]="saving()"
+          >
+            Cancel
+          </ion-button>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h2>Before Photos</h2>
+
+        <label class="upload-box">
+          <input type="file" accept="image/*" (change)="uploadPhoto($event, 'before')" />
+          <span>{{ uploading() ? 'Uploading...' : 'Upload before photo' }}</span>
+        </label>
+
+        <div class="photo-grid" *ngIf="beforePhotos().length">
+          <img
+            *ngFor="let photo of beforePhotos()"
+            [src]="photo.image_url"
+            alt="Before photo"
+          />
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h2>After Photos</h2>
+
+        <label class="upload-box">
+          <input type="file" accept="image/*" (change)="uploadPhoto($event, 'after')" />
+          <span>{{ uploading() ? 'Uploading...' : 'Upload after photo' }}</span>
+        </label>
+
+        <div class="photo-grid" *ngIf="afterPhotos().length">
+          <img
+            *ngFor="let photo of afterPhotos()"
+            [src]="photo.image_url"
+            alt="After photo"
+          />
+        </div>
+      </div>
+    </ng-container>
+  </section>
 </ion-content>

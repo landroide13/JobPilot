@@ -19,7 +19,7 @@ import { ClientService } from '../core/services/client.service';
   templateUrl: './add-job.page.html',
   styleUrls: ['./add-job.page.scss']
 })
-export class AddJobPage implements OnInit {
+export class AddJobPage {
   clients = signal<Client[]>([]);
   loading = signal(false);
   saving = signal(false);
@@ -40,7 +40,7 @@ export class AddJobPage implements OnInit {
     private router: Router
   ) {}
 
-  async ngOnInit() {
+  async ionViewWillEnter(){
     await this.loadClients();
   }
 
