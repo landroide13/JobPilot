@@ -13,7 +13,7 @@ import { Supabase } from '../../services/supabase';
 })
 export class LandingPage {
 
-  lang = signal<'en' | 'fr'>('en');
+  lang = signal<'en' | 'fr'>('fr');
 
   t = {
     en: {
@@ -102,7 +102,7 @@ export class LandingPage {
 
   copy() {
     return this.t[this.lang()];
-  }
+  } 
 
   switchLang(value: 'en' | 'fr') {
     this.lang.set(value);
