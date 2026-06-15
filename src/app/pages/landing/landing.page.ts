@@ -13,7 +13,7 @@ import { Supabase } from '../../services/supabase';
 })
 export class LandingPage {
 
-  lang = signal<'en' | 'fr'>('en');
+  lang = signal<'en' | 'fr'>('fr');
 
   t = {
     en: {
